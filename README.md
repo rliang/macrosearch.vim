@@ -36,8 +36,10 @@ available so you can trigger it with `.`.
   starts a new recording.
 * `nmap / <Plug>(macrosearch-/)`: Same as `/`, but also starts a new recording.
 * `nmap ? <Plug>(macrosearch-?)`: Same as `?`, but also starts a new recording.
-* `nmap * <Plug>(macrosearch-*)`: Same as `*`, but also starts a new recording.
-* `nmap # <Plug>(macrosearch-#)`: Same as `#`, but also starts a new recording.
+* `nmap * <Plug>(macrosearch-*)`: Same as `*N`, but also starts a new
+  recording.
+* `nmap # <Plug>(macrosearch-#)`: Same as `#N`, but also starts a new
+  recording.
 * `nmap n <Plug>(macrosearch-n)`: Same as `n`, but also stops recording and
   restarts if needed.
 * `nmap N <Plug>(macrosearch-N)`: Same as `N`, but also stops recording and
