@@ -25,7 +25,11 @@ endf
 func! macrosearch#stop(...)
   norm! q
   if s:changed
-    sil! call repeat#set(getreg(g:macrosearch#register))
+    let reg=getreg(g:macrosearch#register)
+    if !g:macrosearch#include_last
+      let reg=reg[:-2]
+    end
+    sil! call repeat#set(reg)
   else
     call macrosearch#start()
   end

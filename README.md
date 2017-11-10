@@ -2,12 +2,14 @@
 Automates macro recording between search matches. Experimental.
 
 ## What
-This plugin seeks to eliminate the need for manually recording macros to
-operate on searched patterns.
+This plugin seeks to eliminate the need to manually record macros for operating
+on searched patterns.
 
 Such that `/ {pattern} <CR> q q {edits} n q @ q @ @ @ @`
 
-...becomes `/ {pattern} <CR> {edits} n . . .`
+...becomes `/ {pattern} <CR> {edits} n . n . n .`
+
+...or with `macrosearch#include_last=1`: `/ {pattern} <CR> {edits} n . . .`
 
 This can be useful when:
 * You don't want to use
@@ -15,7 +17,7 @@ This can be useful when:
 * Some editing task is hard to express with regex for `:%s`.
 
 ## How
-Basically, it starts recording when you search with `/` or `?` in normal mode,
+By default, it starts recording when you search with `/` or `?` in normal mode,
 and stops when you jump to the next match with `n` or `N`.
 
 Perhaps the first match isn't the one you want to operate on, so if there have
@@ -30,10 +32,14 @@ available so you can trigger it with `.`.
 * `let g:macrosearch#register='e'`: Which register to record macros to.
   Affects the default mapping of `<plug>(macrosearch-operator)`.
 * `let g:macrosearch#defaults=1`: Whether to use default mappings.
+* `let g:macrosearch#include_last=0`: Whether to include the last `n` or `N` in
+  the macro.
 
 ## Mappings
 * `nmap qe <Plug>(macrosearch-operator)`: Search the given text object, and
   starts a new recording.
+* `nmap qeq <Plug>(macrosearch-current)`: Jump to the next match of the current
+  search pattern, and starts a new recording.
 * `nmap / <Plug>(macrosearch-/)`: Same as `/`, but also starts a new recording.
 * `nmap ? <Plug>(macrosearch-?)`: Same as `?`, but also starts a new recording.
 * `nmap * <Plug>(macrosearch-*)`: Same as `*N`, but also starts a new
@@ -41,13 +47,14 @@ available so you can trigger it with `.`.
 * `nmap # <Plug>(macrosearch-#)`: Same as `#N`, but also starts a new
   recording.
 * `nmap n <Plug>(macrosearch-n)`: Same as `n`, but also stops recording and
-  restarts if needed.
+  restarts if there have been no modifications since.
 * `nmap N <Plug>(macrosearch-N)`: Same as `N`, but also stops recording and
-  restarts if needed.
+  restarts if there have been no modifications since.
 
 ## Functions
 * `macrosearch#operator()`: Operator function to search the given text object,
   and start a new recording.
 * `macrosearch#start()`: Starts a new recording. When used as an operator
   function, uses the previous search pattern.
-* `macrosearch#stop()`: Stops recording, and restarts if needed.
+* `macrosearch#stop()`: Stops recording, and restarts if there have been no
+  modifications since.
