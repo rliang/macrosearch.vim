@@ -3,7 +3,6 @@ let g:loaded_macrosearch=1
 
 let g:macrosearch#register=get(g:,'macrosearch#register','e')
 let g:macrosearch#defaults=get(g:,'macrosearch#defaults',1)
-let g:macrosearch#include_last=get(g:,'macrosearch#include_last',0)
 
 func! s:map(mode,plug,default,rhs)
   exe a:mode.'noremap' '<silent>' a:plug a:rhs
